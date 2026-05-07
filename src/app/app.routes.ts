@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
 
+// Aquí se vanb a guardar todas las rutas de la aplicación
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',
+  { // Esta es la ruta principal cuando la URL está vacía
+    path: '', 
+    redirectTo: 'login', // Redirecciona al login de manera automática
     pathMatch: 'full'
   },
   {
