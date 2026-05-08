@@ -69,7 +69,7 @@ export class LoginPage {
       return;
     }
     // Redirecciona al home
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/tabs');
   }
 
 
