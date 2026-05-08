@@ -1,26 +1,27 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';
-import { Router } from '@angular/router';
-import { SupabaseService } from '../services/supabase.service';// Se coloca la ruta que
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';// Importación de componentes de Ionic que se usan en el HTML
+import { Router } from '@angular/router';// Permite navegar entre páginas
+import { SupabaseService } from '../services/supabase.service';// Importa el servicio de Supabase
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton],
+  selector: 'app-home', // Nombre del componente
+  templateUrl: 'home.page.html', // HTML de la página
+  styleUrls: ['home.page.scss'], // Estilos de la página
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton],// Componentes de Ionic que se usarán
 })
 export class HomePage {
+  // Constructor donde se inyectan los servicios
   constructor(
-    private supabaseService:SupabaseService,
-    private router: Router
-  ) {}
-  async cerrarSesion(){
-    const {error}= await this.supabaseService.logout();
-
-    if (error){
-      console.log('Error al cerrar sesión: ', error.message);
-      return;
+    private supabaseService: SupabaseService,// Permite usar funciones de Supabase
+    private router: Router // Permite cambiar de página
+  ) { }
+  async cerrarSesion() {// Función para cerrar sesión
+    const { error } = await this.supabaseService.logout();// Llama al método logout del servicio
+    // Verifica si hubo error
+    if (error) {
+      console.log('Error al cerrar sesión: ', error.message);// Muestra el error en consola
+      return;// Detiene la función
     }
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']);// Si todo sale bien vuelve al login
   }
 }
