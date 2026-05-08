@@ -1,15 +1,101 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <!-- Título de la página -->
-    <ion-title>
-      Busca a un Pokemón
-    </ion-title>
-    <!-- Botón para cerrar sesión -->
-    <ion-button slot="end" fill="clear" color="danger" (click)="cerrarSesion()">
-      <!-- Icono logout -->
-      <ion-icon name="log-out-outline"></ion-icon>
-    </ion-button>
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>PokeFind</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSesion()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<ion-content class="ion-padding fondo">
 
+  <div class="titulo">
+    <h1>Busca a tu Pokémon favorito</h1>
+    <p>Conoce sus características 🔮</p>
+  </div>
+
+  <ion-card class="buscador-card">
+    <ion-item lines="none">
+      <ion-input placeholder="Busca un Pokémon..." [(ngModel)]="pokemonName">
+      </ion-input>
+    </ion-item>
+  </ion-card>
+
+  <ion-button expand="block" shape="round" color="tertiary" class="ion-margin-top" (click)="searchPokemon()">
+    Buscar Pokémon
+  </ion-button>
+
+  <div class="ion-text-center ion-padding" *ngIf="loading">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Buscando...</p>
+  </div>
+
+  <ion-card *ngIf="pokemon && !loading" class="pokemon-card">
+
+    <div class="imagen-box">
+      <img [src]="pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default"
+        [alt]="pokemon.name">
+    </div>
+
+    <ion-card-header class="ion-text-center">
+      <ion-card-subtitle>
+        Pokémon #{{ pokemon.id }}
+      </ion-card-subtitle>
+
+      <ion-card-title>
+        {{ pokemon.name | uppercase }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <div class="tipos">
+        <ion-chip color="tertiary" *ngFor="let tipo of pokemon.types">
+          {{ tipo.type.name | titlecase }}
+        </ion-chip>
+      </div>
+
+      <ion-list>
+
+        <ion-item>
+          <ion-label>
+            <h2>Altura</h2>
+            <p>{{ pokemon.height / 10 }} m</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Peso</h2>
+            <p>{{ pokemon.weight / 10 }} kg</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Habilidades</h2>
+            <p *ngFor="let habilidad of pokemon.abilities">
+              {{ habilidad.ability.name | titlecase }}
+            </p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>
+            <h2>Estadísticas de combate</h2>
+            <p *ngFor="let stat of pokemon.stats">
+              {{ stat.stat.name | titlecase }}:
+              <strong>{{ stat.base_stat }}</strong>
+            </p>
+          </ion-label>
+        </ion-item>
+
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
