@@ -5,6 +5,9 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 
+// PWA Elements para que funcione la cámara en navegador
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -12,3 +15,6 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes, withPreloading(PreloadAllModules)),
   ],
 });
+
+// Activar el modal de cámara en navegador
+defineCustomElements(window);
