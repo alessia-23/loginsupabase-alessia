@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import {IonContent,IonHeader,IonTitle,IonToolbar,IonIcon,IonButton} from '@ionic/angular/standalone';
+import {IonButton,IonCard,IonCardContent,IonCardHeader,IonCardSubtitle,IonCardTitle,IonItem,IonList,IonThumbnail,IonIcon} from '@ionic/angular/standalone';
+import { IonLabel, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import {IonItemDivider,IonItemGroup,IonItemOption,IonItemOptions,IonItemSliding} from '@ionic/angular/standalone';
+import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
 import { logOutOutline } from 'ionicons/icons';
@@ -13,7 +16,9 @@ import { SupabaseService } from '../services/supabase.service';
   templateUrl: './tab1.page.html',
   styleUrls: ['./tab1.page.scss'],
   standalone: true,
-  imports: [IonContent,IonHeader,IonTitle,IonToolbar,IonIcon,IonButton,CommonModule,FormsModule]
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCard, IonCardContent, 
+    IonCardHeader, IonCardSubtitle, IonCardTitle, IonLabel, IonItem, IonList, IonThumbnail, IonItemDivider, IonItemGroup, 
+    IonItemOption, IonItemOptions, IonItemSliding, IonCol, IonGrid, IonRow, IonIcon]
 })
 export class Tab1Page implements OnInit {
 
@@ -34,5 +39,8 @@ export class Tab1Page implements OnInit {
       return;
     }
     this.router.navigate(['/login']);
+  }
+    abrirRepo() {
+    window.open('https://github.com/alessia-23', '_blank');
   }
 }
